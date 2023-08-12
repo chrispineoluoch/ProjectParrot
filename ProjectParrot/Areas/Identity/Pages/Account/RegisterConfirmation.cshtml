@@ -1,0 +1,33 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Confirm your email";
+}
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+        <p>
+            This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
+            Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+        </p>
+    }
+    else
+    {
+        <div class="card signin-custom-card">
+            <div class="card-body">
+                <h2 class="fw-bold text-center">@ViewData["Title"]</h2>
+            </div>
+            <form>
+                <p class="text-center mt-3">
+                    Please check your email to confirm your account.
+                </p>
+                <button type="submit" class="w-100 btn btn-lg btn-primary" asp-page="./Login">Back to login</button>
+                <p class="text-center mt-3 display-10">
+                    Didn’t get email? <br />
+                    Check your Junk Mail folder or give it some time. If you still don’t have any luck, contact <a asp-area="" asp-controller="Home" asp-action="CustomerService" target="_blank">Customer Service</a>
+                </p>
+            </form>
+        </div>
+    }
+}
+

@@ -1,0 +1,24 @@
+﻿    @page
+    @model ConfirmEmailModel
+    @{
+        ViewData["Title"] = "Email confirmed";
+        Layout = "_AuthenticationLayout";
+    }
+
+<div class="card signin-custom-card mt-4">
+    <div class="card-body">
+        <form id="account" method="post">
+            <div class="text-center">
+                <i class="fa-6x fa-solid fa-circle-check text-center mb-4 check-yes-solid"></i>
+                <h2 class="fw-bold text-center">@ViewData["Title"]</h2>
+                <p class="text-center mt-4 mb-2">
+                    Thank you for confirming your email
+                </p>
+                <p class="text-center display-10">
+                    You're almost there
+                </p>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary" asp-page="./Login">Back to login</button>
+        </form>
+    </div>
+</div>

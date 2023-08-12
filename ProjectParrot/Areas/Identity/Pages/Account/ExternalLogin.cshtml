@@ -1,0 +1,52 @@
+﻿@page
+@model ExternalLoginModel
+@{
+    ViewData["Title"] = $"Link your {Model.ProviderDisplayName} account to complete registration";
+    ViewData["ProviderName"] = $"{Model.ProviderDisplayName} account";
+}
+
+<div class="card signin-custom-card">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            @if (Model.ProviderDisplayName == "Google")
+            {
+                <i class="fa-2x fa-brands fa-google"></i> <!-- Replace with the appropriate Fontawesome class for the Google icon -->
+            }
+            else if (Model.ProviderDisplayName == "Microsoft")
+            {
+                <i class="fa-2x fa-brands fa-microsoft"></i> <!-- Replace with the appropriate Fontawesome class for the Microsoft icon -->
+            }
+            <div class="d-flex align-items-center justify-content-center mx-2 association-border"></div>
+            <i class="fa-2x fa-solid fa-dove"></i>
+        </div>
+        <h5 class="fw-bold mt-4 text-center">@ViewData["Title"]</h5>
+    </div>
+    <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" readonly/>
+            <label asp-for="Input.Email" class="form-label text-secondary">Verify your email address as:</label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <button type="submit" class="w-100 btn btn-lg btn-primary google-button">
+            Agree and Continue
+        </button>
+        <p class="mt-3 text-center display-10">
+            We respect your privacy. By clicking to verify your
+            @if (Model.ProviderDisplayName == "Google")
+            {
+                <text>Google Account,</text>
+            }
+            else if (Model.ProviderDisplayName == "Microsoft")
+            {
+                <text>Microsoft Account,</text>
+            }
+            you agree to the <a asp-area="" asp-controller="Home" asp-action="TermsOfUse" target="_blank">Terms of Use</a>
+            and <a asp-area="" asp-controller="Home" asp-action="Privacy" target="_blank">Privacy Policy</a>.
+        </p>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
